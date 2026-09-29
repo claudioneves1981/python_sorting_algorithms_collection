@@ -1,5 +1,5 @@
 import math
-
+import random
 
 def merge(left, right):
     result = []
@@ -17,6 +17,34 @@ def merge(left, right):
     result.extend(right[j:])
 
     return result
+
+def merge_alt(a,left,mid,right):
+    i = left
+    j = mid + 1
+    k = left
+    temp = [0] * len(a)
+
+    while i <= mid and j <= right:
+        if a[i] <= a[j]:
+            temp[k] = a[i]
+            i += 1
+        else:
+            temp[k] = a[j]
+            j += 1
+        k += 1
+
+    while i <= mid:
+        temp[k] = a[i]
+        i += 1
+        k += 1
+
+    while j <= right:
+        temp[k] = a[j]
+        j += 1
+        k += 1
+
+    for i in range(left, right + 1):
+        a[i] = temp[i]
 
 def merge_sort(arr):
     if len(arr) <= 1:
@@ -114,7 +142,6 @@ def stalin_sort(arr):
     return kept
 
 def bogosort(arr):
-    import random
     while not is_sorted(arr):
         random.shuffle(arr)
     return arr
@@ -159,10 +186,12 @@ def library_sort(arr):
             [arr[j], arr[j -1]] =[arr[j-1],arr[j]]
     return arr
 
-arr = [38, 27, 43, 3, 9, 82, 10]
-def slow_sort(arr, i=0, j=len(arr)-1):
+
+def slow_sort(arr, i=0, j=None):
+    if j is None:
+        j = len(arr) - 1
     if i >= j:
-        return
+        return arr
     m = (i + j) >> 1
     slow_sort(arr, i, m)
     slow_sort(arr, m + 1, j)
@@ -189,7 +218,40 @@ def odd_even_sort(arr):
                 is_sorted = False
 
     return arr
-            
+
+def insertion_sort(a,left,right):
+    if left == None and right == None:
+        for i in range(1, len(a)):
+                key = a[i]
+                j = i - 1
+                while j >= 0 and a[j] > key:
+                    a[j + 1] = a[j]
+                    j -= 1
+                a[j + 1] = key
+    else:
+        for i in range(left + 1, right + 1):
+            j = i
+            while j > left and a[j - 1] >  a[j]:
+                a[j-1],a[j] = a[j],a[j-1]
+                j -= 1
+    return a
+
+
+def tim_sort(a, RUN = 4):
+    n = len(a)
+    for i in range(0, n, RUN):
+        insertion_sort(a,i,min(i+RUN - 1, n -1))
+    size = RUN
+    while size < n:
+        for left in range(0,n, 2 * size):
+            mid = min(left+ size-1, n -1)
+            right = min(left+2*size-1,n -1)
+            merge_alt(a,left, mid, right)
+        size *=2 
+    return a
+
+
+
 
 if __name__ == "__main__":
     sample_array = [38, 27, 43, 3, 9, 82, 10]
@@ -214,3 +276,10 @@ if __name__ == "__main__":
     print("Sorted array (Slow Sort):", sorted_array)
     sorted_array = odd_even_sort(sample_array)
     print("Sorted array (Odd-Even Sort):", sorted_array)
+    sorted_array = tim_sort(sample_array)
+    print("Sorted array (Tim Sort):", sorted_array)
+    sorted_array = insertion_sort(sample_array, None, None)
+    print("Sorted array (Insertion Sort):", sorted_array)
+
+
+
