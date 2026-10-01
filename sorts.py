@@ -312,6 +312,30 @@ def adaptive_shell_sort(arr):
                 gap = int(gap / 2.5)
     return arr
 
+def pancake_sort(arr):
+    n = len(arr)
+
+    for curr_size in range(n, 1, -1):
+        mi = find_max(arr, curr_size)
+        if mi != curr_size - 1:
+            flip(arr, mi)
+            flip(arr, curr_size - 1)
+    return arr
+
+def find_max(arr, n):
+    mi = 0
+    for i in range(1, n):
+        if arr[i] > arr[mi]:
+            mi = i
+    return mi
+
+def flip(arr, i):
+    l, r = 0, i
+    while l < r:
+        arr[l], arr[r] = arr[r], arr[l]
+        l += 1
+        r -= 1
+
 
 if __name__ == "__main__":
     sample_array = [38, 27, 43, 3, 9, 82, 10]
@@ -406,3 +430,9 @@ if __name__ == "__main__":
     fim = time.perf_counter()
     tempo_execucao = fim - inicio
     print("Sorted array (Adaptive Shell Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+
+    inicio = time.perf_counter()
+    sorted_array = pancake_sort(sample_array)
+    fim = time.perf_counter()
+    tempo_execucao = fim - inicio
+    print("Sorted array (Pancake Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
