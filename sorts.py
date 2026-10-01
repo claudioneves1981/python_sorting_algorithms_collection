@@ -265,6 +265,53 @@ def bottom_up_merge_sort(arr):
     size_temp(width, n, arr)
     return arr
 
+def quick_sort_hoare(arr):
+    def hoare_partition(low, high):
+        pivot = arr[low]
+        i = low - 1
+        j = high + 1
+
+        while True:
+            i += 1
+            while arr[i] < pivot:
+                i += 1
+
+            j -= 1
+            while arr[j] > pivot:
+                j -= 1
+
+            if i >= j:
+                return j
+
+            arr[i], arr[j] = arr[j], arr[i]
+
+    def quick_sort_recursive(low, high):
+        if low >= high:
+            return
+        p = hoare_partition(low, high)
+        quick_sort_recursive(low, p)
+        quick_sort_recursive(p + 1, high)
+    quick_sort_recursive(0, len(arr) - 1)
+    return arr
+
+def adaptive_shell_sort(arr):
+    n = len(arr)
+    gap = n // 2
+
+    while gap > 0:
+        swap_count = 0
+        for i in range(gap, n):
+            j = i
+            while j >= gap and arr[j - gap] > arr[j]:
+                arr[j], arr[j - gap] = arr[j - gap], arr[j]
+                j -= gap
+                swap_count += 1
+            if swap_count > n:
+                gap = int(gap / 1.5)
+            else:
+                gap = int(gap / 2.5)
+    return arr
+
 
 if __name__ == "__main__":
     sample_array = [38, 27, 43, 3, 9, 82, 10]
@@ -348,5 +395,14 @@ if __name__ == "__main__":
     tempo_execucao = fim - inicio
     print("Sorted array (Buttom Up Merge Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
 
+    inicio = time.perf_counter()
+    sorted_array = quick_sort_hoare(sample_array)
+    fim = time.perf_counter()
+    tempo_execucao = fim - inicio
+    print("Sorted array (Quick Sort Hoare):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
 
-
+    inicio = time.perf_counter()
+    sorted_array = adaptive_shell_sort(sample_array)
+    fim = time.perf_counter()
+    tempo_execucao = fim - inicio
+    print("Sorted array (Adaptive Shell Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
