@@ -19,33 +19,33 @@ def merge(left, right):
 
     return result
 
-def merge_alt(a,left,mid,right):
+def merge_alt(arr,left,mid,right):
     i = left
     j = mid + 1
-    k = left
-    temp = [0] * len(a)
+    k = left    
+    temp = [0] * len(arr)
 
     while i <= mid and j <= right:
-        if a[i] <= a[j]:
-            temp[k] = a[i]
+        if arr[i] <= arr[j]:
+            temp[k] = arr[i]
             i += 1
         else:
-            temp[k] = a[j]
+            temp[k] = arr[j]
             j += 1
         k += 1
 
     while i <= mid:
-        temp[k] = a[i]
+        temp[k] = arr[i]
         i += 1
         k += 1
 
     while j <= right:
-        temp[k] = a[j]
+        temp[k] = arr[j]
         j += 1
         k += 1
 
     for i in range(left, right + 1):
-        a[i] = temp[i]
+        arr[i] = temp[i]
 
 def merge_sort(arr):
     
@@ -91,7 +91,7 @@ def array_comparision_swap(arr, i):
      if arr[i] > arr[i + 1]:
         arr[i], arr[i + 1] = arr[i + 1], arr[i]
        
-def heapSort(arr):
+def heap_sort(arr):
     n = len(arr)
 
     for i in range(n // 2 - 1, -1, -1):
@@ -105,14 +105,14 @@ def heapSort(arr):
 
 def heapify(arr, n, i):
     largest = i
-    l = 2 * i + 1
-    r = 2 * i + 2
+    left = 2 * i + 1
+    right = 2 * i + 2
 
-    if l < n and arr[l] > arr[largest]:
-        largest = l
+    if left < n and arr[left] > arr[largest]:
+        largest = left
 
-    if r < n and arr[r] > arr[largest]:
-        largest = r
+    if right < n and arr[right] > arr[largest]:
+        largest = right
 
     if largest != i:
         arr[i], arr[largest] = arr[largest], arr[i]
@@ -142,10 +142,10 @@ def stalin_sort(arr):
     for i in range(1, len(arr)):
         if arr[i] >= max_so_far:
             kept.append(arr[i])
-            max_so_far = arr[i]
+            max_so_far= arr[i]
     return kept
 
-def bogosort(arr):
+def bogo_sort(arr):
     while not is_sorted(arr):
         random.shuffle(arr)
     return arr
@@ -156,7 +156,7 @@ def is_sorted(arr):
             return False
     return True
 
-def bucketSort(arr):
+def bucket_sort(arr):
     
     max_value = max(arr)
     buckets = [[] for _ in range(max_value + 1)]
@@ -223,38 +223,38 @@ def odd_even_sort(arr):
 
     return arr
 
-def insertion_sort(a,left,right):
+def insertion_sort(arr,left,right):
     if left == None and right == None:
-        for i in range(1, len(a)):
-                key = a[i]
+        for i in range(1, len(arr)):
+                key = arr[i]
                 j = i - 1
-                while j >= 0 and a[j] > key:
-                    a[j + 1] = a[j]
+                while j >= 0 and arr[j] > key:
+                    arr[j + 1] = arr[j]
                     j -= 1
-                a[j + 1] = key
+                arr[j + 1] = key
     else:
         for i in range(left + 1, right + 1):
             j = i
-            while j > left and a[j - 1] >  a[j]:
-                a[j-1],a[j] = a[j],a[j-1]
+            while j > left and arr[j - 1] >  arr[j]:
+                arr[j-1],arr[j] = arr[j],arr[j-1]
                 j -= 1
-    return a
+    return arr
 
 
-def tim_sort(a, RUN = 4):
-    n = len(a)
+def tim_sort(arr, RUN = 4):
+    n = len(arr)
     for i in range(0, n, RUN):
-        insertion_sort(a,i,min(i+RUN - 1, n -1))
+        insertion_sort(arr,i,min(i+RUN - 1, n -1))
     size = RUN
-    size_temp(size, n, a)
-    return a
+    size_temp(size, n, arr)
+    return arr
 
-def size_temp(size, n, a):
+def size_temp(size, n, arr):
     while size < n:
         for left in range(0,n, 2 * size):
             mid = min(left+ size-1, n -1)
             right = min(left+2*size-1,n -1)
-            merge_alt(a,left, mid, right)
+            merge_alt(arr,left, mid, right)
         size *=2 
    
 
@@ -330,109 +330,109 @@ def find_max(arr, n):
     return mi
 
 def flip(arr, i):
-    l, r = 0, i
-    while l < r:
-        arr[l], arr[r] = arr[r], arr[l]
-        l += 1
-        r -= 1
+    left, right = 0, i
+    while left < right:
+        arr[left], arr[right] = arr[right], arr[left]
+        left += 1
+        right -= 1
 
 
 if __name__ == "__main__":
     sample_array = [38, 27, 43, 3, 9, 82, 10]
     print("Original array:", sample_array)
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = merge_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Merge Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Merge Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = cocktail_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Cocktail Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Cocktail Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
-    sorted_array = heapSort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Heap Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    start = time.perf_counter()
+    sorted_array = heap_sort(sample_array)
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Heap Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = counting_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Counting Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Counting Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
  
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = stalin_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Stalin Sort):", sorted_array,f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Stalin Sort):", sorted_array,f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
-    sorted_array = bogosort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Bogosort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    start = time.perf_counter()
+    sorted_array = bogo_sort(sample_array)
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (bogo_sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
-    sorted_array = bucketSort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Bucket Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    start = time.perf_counter()
+    sorted_array = bucket_sort(sample_array)
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Bucket Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = library_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Library Sort):", sorted_array,f"Time Execution {tempo_execucao:.10f}" )
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Library Sort):", sorted_array,f"Time Execution {execution_time:.10f}" )
     
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = slow_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Slow Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Slow Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = odd_even_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Odd-Even Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Odd-Even Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = tim_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Tim Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Tim Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = insertion_sort(sample_array, None, None)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Insertion Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Insertion Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
     
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = bottom_up_merge_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Buttom Up Merge Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Buttom Up Merge Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = quick_sort_hoare(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Quick Sort Hoare):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Quick Sort Hoare):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = adaptive_shell_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Adaptive Shell Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Adaptive Shell Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
 
-    inicio = time.perf_counter()
+    start = time.perf_counter()
     sorted_array = pancake_sort(sample_array)
-    fim = time.perf_counter()
-    tempo_execucao = fim - inicio
-    print("Sorted array (Pancake Sort):", sorted_array, f"Time Execution {tempo_execucao:.10f}")
+    end = time.perf_counter()
+    execution_time = end - start
+    print("Sorted array (Pancake Sort):", sorted_array, f"Time Execution {execution_time:.10f}")
