@@ -119,17 +119,17 @@ def heapify(arr, n, i):
         heapify(arr, n, largest)
 
 def counting_sort(arr):
-    maximo = max(arr)
-    count = [0] * (maximo + 1)
+    top = max(arr)
+    count = [0] * (top + 1)
     for num in arr:
         count[num] += 1
     
     i = 0
-    for val in range(0,maximo):
-        while count[val] > 0:
-            arr[i] = val
+    for j in range(0,top):
+        while count[j] > 0:
+            arr[i] = j
             i += 1
-            count[val] -= 1
+            count[j] -= 1
     return arr
 
 def stalin_sort(arr):
@@ -158,8 +158,8 @@ def is_sorted(arr):
 
 def bucket_sort(arr):
     
-    max_value = max(arr)
-    buckets = [[] for _ in range(max_value + 1)]
+    top = max(arr)
+    buckets = [[] for _ in range(top + 1)]
 
     for num in arr:
         bucketIndex = math.floor((num - 1)/3)
