@@ -47,7 +47,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 * **Characteristics:** Fast in practice, in-place sorting, but has a worst-case time complexity of $O(n^2)$ if poor pivots are chosen.
 
 #### **Heap Sort**
-* **Method:** `heapSort(arr)`
+* **Method:** `heap_sort(arr)`
 * **Description:** Converts the array into a Max-Heap data structure. It repeatedly extracts the maximum element (root) and swaps it with the last unsorted position, then heapifies the remaining structure.
 * **Characteristics:** Guaranteed $O(n \log n)$ time complexity and operates in-place ($O(1)$ auxiliary space).
 
@@ -56,7 +56,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 ### 2. Hybrid & Variant Sorts
 
 #### **Tim Sort**
-* **Method:** `tim_sort(a, RUN=4)`
+* **Method:** `tim_sort(arr, RUN=4)`
 * **Description:** A hybrid algorithm derived from Merge Sort and Insertion Sort (used natively by Python and Java). It breaks the array into small chunks ("runs"), sorts them using Insertion Sort, and merges them using an iterative merge step.
 * **Characteristics:** Highly optimized for real-world data containing pre-sorted sequences.
 
@@ -75,7 +75,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 ### 3. Simple & Exchange Sorts
 
 #### **Insertion Sort**
-* **Method:** `insertion_sort(a, left, right)`
+* **Method:** `insertion_sort(arr, left, right)`
 * **Description:** Iteratively builds the final sorted array one element at a time by shifting larger elements to the right and inserting the current item in its correct position.
 * **Characteristics:** Efficient for very small arrays or nearly sorted data ($O(n)$ best case).
 
@@ -104,7 +104,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 * **Characteristics:** Operates in linear time $O(n + k)$ (where $k$ is the maximum value in the array). Best suited for non-negative integer arrays with small ranges.
 
 #### **Bucket Sort**
-* **Method:** `bucketSort(arr)`
+* **Method:** `bucket_sort(arr)`
 * **Description:** Distributes elements into numerical "buckets" based on their values. Each bucket is then sorted individually (using built-in sorting), and the results are concatenated.
 * **Characteristics:** Fast linear-time performance $O(n + k)$ when input elements are uniformly distributed.
 
@@ -113,7 +113,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 ### 5. Esoteric & Joke Sorts
 
 #### **Bogosort (Stupid Sort)**
-* **Method:** `bogosort(arr)`
+* **Method:** `bogo_sort(arr)`
 * **Description:** Randomly shuffles the array until it happens to land in sorted order.
 * **Characteristics:** Purely theoretical/joke algorithm. Average time complexity is $O((n + 1)!)$, and it can run indefinitely.
 
@@ -136,7 +136,7 @@ This repository contains a comprehensive collection of sorting algorithms implem
 Ensure you have Python installed (Python 3.6+ recommended):
 
 ```bash
-python main.py
+python sorts.py
 ```
 
 ### Script Workflow
