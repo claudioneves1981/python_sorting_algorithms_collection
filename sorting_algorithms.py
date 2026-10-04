@@ -1,8 +1,7 @@
-import math
 import random
 import time
 
-# --- Algoritmos ---
+# --- Sorting Algorithms ---
 
 def merge(left, right):
     result = []
@@ -138,7 +137,6 @@ def is_sorted(arr):
     return True
 
 def bogo_sort(arr):
-    # Cuidado: bogo_sort com muitos elementos pode travar o programa
     while not is_sorted(arr):
         random.shuffle(arr)
     return arr
@@ -346,8 +344,42 @@ def comb_sort(arr):
 
     return arr
 
+def weak_heap_sort(arr):
+    n = len(arr)
+    def sift_down(root, end):
+        while True:
+            largest = root
+            left = 2 * root + 1
+            right = 2 * root + 2
+            if left <= end and arr[left] > arr[largest]:
+                largest = left
+            if right <= end and arr[right] > arr[largest]:
+                largest = right
+            if largest == root:
+                break
+            arr[root], arr[largest] = arr[largest], arr[root]
+            root = largest
 
-# --- Execução Principal ---
+    for i in range(n // 2 - 1, -1, -1):
+        sift_down(i, n - 1)
+    for i in range(n - 1, 0, -1):
+        arr[0], arr[i] = arr[i], arr[0]
+        sift_down(0, i - 1)
+    return arr
+
+def spaghetti_sort(arr):
+    n = len(arr)
+    for end in range(n - 1, 0, -1):
+        max_index = 0
+        for i in range(1, end + 1):
+            if arr[i] > arr[max_index]:
+                max_index = i
+        if max_index != end:
+            arr[max_index], arr[end] = arr[end], arr[max_index]
+    return arr
+
+
+# --- Execution and Benchmarking ---
 
 if __name__ == "__main__":
     sample_array = [38, 27, 43, 3, 9, 82, 10]
@@ -370,7 +402,9 @@ if __name__ == "__main__":
         ("Quick Sort (Hoare)", quick_sort_hoare),
         ("Adaptive Shell Sort", adaptive_shell_sort),
         ("Pancake Sort", pancake_sort),
-        ("Comb Sort", comb_sort)
+        ("Comb Sort", comb_sort),
+        ("Weak Heap Sort", weak_heap_sort),
+        ("Spaghetti Sort", spaghetti_sort)
     ]
 
     for name, func in algorithms:
