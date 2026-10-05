@@ -10,6 +10,7 @@ A comprehensive collection of sorting algorithms implemented in Python. This rep
 | **Quick Sort (Hoare)** | $O(n \log n)$ | $O(n^2)$ | $O(\log n)$ | Comparison / Divide & Conquer | 
 | **Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / Heap | 
 | **Weak Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / Heap Variant | 
+| **Block Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / In-Place Merge | 
 | **Tim Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Hybrid (Insertion + Merge) | 
 | **Counting Sort** | $O(n + k)$ | $O(n + k)$ | $O(k)$ | Non-Comparison / Integer | 
 | **Bucket Sort** | $O(n + k)$ | $O(n^2)$ | $O(n)$ | Distribution | 
@@ -64,6 +65,7 @@ Adaptive Shell Sort   : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000890 s
 Pancake Sort          : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001180 s
 Comb Sort             : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000780 s
 Spaghetti Sort        : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000690 s
+Block Sort            : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001310 s
 ```
 
 ## 📝 Important Notes
@@ -72,7 +74,9 @@ Spaghetti Sort        : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000690 s
 
 2. **Analog vs. Simulated Spaghetti Sort:** Spaghetti sort is theoretically an $O(n)$ analog algorithm performed physically by selecting the tallest rod of spaghetti. Software implementations simulate this process, converting it to an $O(n^2)$ selection process.
 
-3. **Performance Warning:** Algorithms like `Bogo Sort` and `Slowsort` have extreme time complexities. Running them on arrays larger than 10 elements may result in extremely long execution times or freezing.
+3. **In-Place Block Sort:** Block Sort divides the array into blocks of size $\sqrt{n}$, sorts them, and recursively merges them using an in-place merge routine to achieve minimal auxiliary memory usage ($O(1)$ space).
+
+4. **Performance Warning:** Algorithms like `Bogo Sort` and `Slowsort` have extreme time complexities. Running them on arrays larger than 10 elements may result in extremely long execution times or freezing.
 
 ## 📄 License
 

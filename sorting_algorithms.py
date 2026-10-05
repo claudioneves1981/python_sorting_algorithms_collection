@@ -1,5 +1,6 @@
 import random
 import time
+import math
 
 # --- Sorting Algorithms ---
 
@@ -378,6 +379,42 @@ def spaghetti_sort(arr):
             arr[max_index], arr[end] = arr[end], arr[max_index]
     return arr
 
+def block_sort(arr):
+    n = len(arr)
+
+    def merge_in_place(start,mid,end):
+        left, right = start,mid
+        while left < right and right < end:
+            if arr[left] <= arr[right]:
+                left += 1
+            else:
+                value = arr[right]
+                index = right
+                while index > left:
+                    arr[index] = arr[index - 1]
+                    index -= 1
+                arr[left] = value
+                left += 1
+                right += 1
+
+    block_size = max(2, int(math.sqrt(n)))
+    for i in range(0,n,block_size):
+        hi = min(i + block_size, n)
+        for a in range(i +1,hi):
+            j = a
+            while j > i and arr[j - 1] > arr[j]:
+                arr[j], arr[j - 1] = arr[j - 1], arr[j]
+                j -= 1
+    width = block_size
+    while width < n:
+        for start in range(0,n,width*2):
+            mid = min(start + width, n)
+            end = min(start + 2 * width, n)
+            if mid < end:
+                merge_in_place(start,mid,end)
+        width *= 2
+    return arr
+
 
 # --- Execution and Benchmarking ---
 
@@ -404,7 +441,8 @@ if __name__ == "__main__":
         ("Pancake Sort", pancake_sort),
         ("Comb Sort", comb_sort),
         ("Weak Heap Sort", weak_heap_sort),
-        ("Spaghetti Sort", spaghetti_sort)
+        ("Spaghetti Sort", spaghetti_sort),
+        ("Block Sort", block_sort)
     ]
 
     for name, func in algorithms:
