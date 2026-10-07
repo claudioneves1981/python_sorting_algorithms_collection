@@ -1,83 +1,79 @@
-# Python Sorting Algorithms Collection
+# Sorting Algorithms Suite in Python
 
-A comprehensive collection of sorting algorithms implemented in Python. This repository includes standard, efficient algorithms used in production as well as esoteric, analog, and educational sorting algorithms.
+A benchmark suite featuring **20 sorting algorithms** implemented in Python. The project includes classical comparison sorts, non-comparison algorithms, hybrid methods, esoteric/educational sorting algorithms, and gap-sequence variants like Shell Sort with Sedgewick's sequence.
+
+---
 
 ## 📋 Included Algorithms
 
-| Algorithm | Average Time Complexity | Worst-Case Time Complexity | Space Complexity | Type | 
-| ----- | ----- | ----- | ----- | ----- | 
-| **Merge Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Comparison / Divide & Conquer | 
-| **Quick Sort (Hoare)** | $O(n \log n)$ | $O(n^2)$ | $O(\log n)$ | Comparison / Divide & Conquer | 
-| **Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / Heap | 
-| **Weak Heap Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / Heap Variant | 
-| **Block Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(1)$ | Comparison / In-Place Merge | 
-| **Tim Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Hybrid (Insertion + Merge) | 
-| **Counting Sort** | $O(n + k)$ | $O(n + k)$ | $O(k)$ | Non-Comparison / Integer | 
-| **Bucket Sort** | $O(n + k)$ | $O(n^2)$ | $O(n)$ | Distribution | 
-| **Comb Sort** | $O(n \log n)$ | $O(n^2)$ | $O(1)$ | Comparison / Exchange | 
-| **Adaptive Shell Sort** | $O(n \log n)$ | $O(n^2)$ | $O(1)$ | Comparison / Insertion | 
-| **Insertion Sort** | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Comparison / Insertion | 
-| **Cocktail Shaker Sort** | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Comparison / Exchange | 
-| **Odd-Even Sort** | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Comparison / Exchange | 
-| **Library Sort** | $O(n \log n)$ | $O(n^2)$ | $O(n)$ | Comparison / Insertion | 
-| **Pancake Sort** | $O(n^2)$ | $O(n^2)$ | $O(1)$ | Comparison / Reversal | 
-| **Spaghetti Sort (Simulated)** | $O(n)$ *(analog)* / $O(n^2)$ *(simulated)* | $O(n^2)$ | $O(1)$ | Selection Variant / Physical Analog | 
-| **Bottom-Up Merge Sort** | $O(n \log n)$ | $O(n \log n)$ | $O(n)$ | Iterative Merge | 
-| **Slowsort** | $O(n^{\frac{\log n}{2.7188}})$ | $O(n^{\frac{\log n}{2.7188}})$ | $O(\log n)$ | Multiply and Surrender | 
-| **Bogo Sort** | $O((n+1)!)$ | Unbounded | $O(1)$ | Stochastic / Esoteric | 
+### 1. Standard Comparison Sorts
+* **Merge Sort**: Divide-and-conquer algorithm with recursive splitting and merging.
+* **Heap Sort**: Selection sort variant using a binary heap data structure.
+* **Insertion Sort**: Simple insertion-based sorting for small datasets.
+* **Quick Sort (Hoare Partition)**: Fast in-place quicksort using Hoare's dual-pointer partitioning scheme.
+* **Bottom-Up Merge Sort**: Iterative merge sort working bottom-up without recursion.
 
-## 🚀 Getting Started
+### 2. Gap & Shell Sort Variants
+* **Adaptive Shell Sort**: Shell sort with dynamically adjusted gap increments based on swap counts.
+* **Shell Sort (Sedgewick)**: Shell sort variant using Sedgewick's gap sequence $4^k + 3 \times 2^{k-1} + 1$, offering significantly improved empirical step bounds over traditional halved gaps.
+* **Comb Sort**: Bubble sort improvement using dynamic gap sizes scaled by a shrink factor ($1.3$).
 
-### Prerequisites
+### 3. Non-Comparison & Distribution Sorts
+* **Counting Sort**: Integer sorting algorithm based on frequency count arrays.
+* **Bucket Sort**: Uniform distribution sorting method partitioning inputs into range buckets.
 
-* **Python 3.7+** (No external dependencies required; uses built-in modules `math`, `random`, and `time`).
+### 4. Hybrid & Advanced Sorts
+* **Tim Sort**: Hybrid algorithm combining insertion sort on small runs with bottom-up merge sort.
+* **Block Sort**: In-place merge sort algorithm dividing arrays into $\sqrt{N}$ blocks, sorting locally with insertion sort and merging in place.
+* **Weak Heap Sort**: Heap sort variant running with relaxed structural properties to reduce total key comparisons.
+* **Library Sort (Gapped Insertion Sort)**: Insertion sort optimization using binary search for position lookup and element shifts.
 
-### Running the Code
+### 5. Concurrent / Exchange Variants
+* **Cocktail Shaker Sort**: Bidirectional bubble sort iterating both forward and backward.
+* **Odd-Even Sort (Parallel Bubble Sort)**: Exchange algorithm operating in odd and even index comparison passes.
+* **Pancake Sort**: Sorting algorithm restricted to reversing sub-arrays (prefix flips).
 
-1. Clone or download the repository.
+### 6. Educational & Esoteric Sorts
+* **Bogo Sort**: Randomized sorting algorithm shuffling until sorted ($O((N+1)!)$ complexity).
+* **Slow Sort**: Multiply-and-surrender esoteric sort designed as a pessimistic recursive algorithm.
+* **Spaghetti Sort**: Conceptual linear-time sorting simulation implemented via max-element extraction.
 
-2. Run the script using Python:
+---
+
+## 📊 Algorithmic Complexities
+
+| Algorithm | Best Time | Average Time | Worst Time | Space Complexity | Stable? |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| **Merge Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(N)$ | Yes |
+| **Heap Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(1)$ | No |
+| **Weak Heap Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(1)$ | No |
+| **Quick Sort (Hoare)** | $O(N \log N)$ | $O(N \log N)$ | $O(N^2)$ | $O(\log N)$ | No |
+| **Tim Sort** | $O(N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(N)$ | Yes |
+| **Insertion Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | Yes |
+| **Shell Sort (Sedgewick)** | $O(N \log N)$ | $O(N^{4/3})$ | $O(N^{4/3})$ | $O(1)$ | No |
+| **Adaptive Shell Sort** | $O(N \log N)$ | $O(N^{3/2})$ | $O(N^2)$ | $O(1)$ | No |
+| **Comb Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N^2)$ | $O(1)$ | No |
+| **Block Sort** | $O(N)$ | $O(N \log N)$ | $O(N \log N)$ | $O(1)$ | Yes |
+| **Counting Sort** | $O(N + K)$ | $O(N + K)$ | $O(N + K)$ | $O(K)$ | Yes |
+| **Bucket Sort** | $O(N + K)$ | $O(N + K)$ | $O(N^2)$ | $O(N)$ | Yes |
+| **Library Sort** | $O(N \log N)$ | $O(N \log N)$ | $O(N^2)$ | $O(N)$ | No |
+| **Cocktail Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | Yes |
+| **Odd-Even Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | Yes |
+| **Pancake Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | No |
+| **Spaghetti Sort** | $O(N)$ | $O(N^2)$ | $O(N^2)$ | $O(1)$ | No |
+| **Slow Sort** | $O(N^{\log N / 2})$ | $O(N^{\log N / 2})$ | $O(N^{\log N / 2})$ | $O(N)$ | No |
+| **Bogo Sort** | $O(N)$ | $O((N+1)!)$ | $\infty$ | $O(1)$ | No |
+
+---
+
+## 🚀 How to Run
+
+### Requirements
+* Python 3.7 or higher (uses built-in `math`, `random`, and `time` modules).
+
+### Execution
+
+Run the main file directly in your terminal:
 
 ```bash
 python sorting_algorithms.py
-```
-
-## 💻 Example Output
-
-```text
-Original array: [38, 27, 43, 3, 9, 82, 10]
-=================================================================
-Merge Sort            : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001820 s
-Cocktail Sort         : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000850 s
-Heap Sort             : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001540 s
-Weak Heap Sort        : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001480 s
-Counting Sort         : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001010 s
-Bogo Sort             : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00341200 s
-Bucket Sort           : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001400 s
-Library Sort          : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000720 s
-Slow Sort             : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00004510 s
-Odd-Even Sort         : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000930 s
-Tim Sort              : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001250 s
-Insertion Sort        : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000540 s
-Bottom Up Merge Sort  : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001680 s
-Quick Sort (Hoare)    : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001120 s
-Adaptive Shell Sort   : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000890 s
-Pancake Sort          : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001180 s
-Comb Sort             : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000780 s
-Spaghetti Sort        : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00000690 s
-Block Sort            : [3, 9, 10, 27, 38, 43, 82] | Time: 0.00001310 s
-```
-
-## 📝 Important Notes
-
-1. **Array Mutability:** The execution harness uses `sample_array.copy()` for each iteration to guarantee that every algorithm sorts an unsorted array, providing fair comparison time metrics.
-
-2. **Analog vs. Simulated Spaghetti Sort:** Spaghetti sort is theoretically an $O(n)$ analog algorithm performed physically by selecting the tallest rod of spaghetti. Software implementations simulate this process, converting it to an $O(n^2)$ selection process.
-
-3. **In-Place Block Sort:** Block Sort divides the array into blocks of size $\sqrt{n}$, sorts them, and recursively merges them using an in-place merge routine to achieve minimal auxiliary memory usage ($O(1)$ space).
-
-4. **Performance Warning:** Algorithms like `Bogo Sort` and `Slowsort` have extreme time complexities. Running them on arrays larger than 10 elements may result in extremely long execution times or freezing.
-
-## 📄 License
-
-This project is open-source and available under the [MIT License](LICENSE).

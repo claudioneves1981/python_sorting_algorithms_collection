@@ -415,6 +415,26 @@ def block_sort(arr):
         width *= 2
     return arr
 
+def shell_sort_sedgewick(arr):
+    n = len(arr)
+    gaps = [1]
+    k = 1
+    while True:
+        gap = 4**k + 3 * 2**(k-1)+1
+        if gap >= n:
+            break
+        gaps.append(gap)
+        k+=1
+    for gap in reversed(gaps):
+        for i in range(gap, n):
+            j = i
+            while j >= gap and arr[j - gap] > arr[j]:
+                arr[j - gap], arr[j] = arr[j], arr[j - gap]
+                j -= gap
+    return arr
+
+
+
 
 # --- Execution and Benchmarking ---
 
@@ -442,7 +462,8 @@ if __name__ == "__main__":
         ("Comb Sort", comb_sort),
         ("Weak Heap Sort", weak_heap_sort),
         ("Spaghetti Sort", spaghetti_sort),
-        ("Block Sort", block_sort)
+        ("Block Sort", block_sort),
+        ("Shell Sort (Sedgewick)", shell_sort_sedgewick)
     ]
 
     for name, func in algorithms:
