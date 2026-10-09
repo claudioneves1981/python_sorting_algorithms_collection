@@ -433,7 +433,18 @@ def shell_sort_sedgewick(arr):
                 j -= gap
     return arr
 
-
+def silly_sort(arr):
+    def _sort(lo,hi):
+        if lo >= hi:
+            return
+        mid = lo + (hi - lo) // 2
+        _sort(lo, mid)
+        _sort(mid + 1, hi)
+        if arr[hi] < arr[mid]:
+            arr[hi], arr[mid] = arr[mid], arr[hi]
+        _sort(lo, hi - 1)
+    _sort(0,len(arr)-1)
+    return arr
 
 
 # --- Execution and Benchmarking ---
@@ -463,7 +474,8 @@ if __name__ == "__main__":
         ("Weak Heap Sort", weak_heap_sort),
         ("Spaghetti Sort", spaghetti_sort),
         ("Block Sort", block_sort),
-        ("Shell Sort (Sedgewick)", shell_sort_sedgewick)
+        ("Shell Sort (Sedgewick)", shell_sort_sedgewick),
+        ("Silly Sort", silly_sort)
     ]
 
     for name, func in algorithms:
